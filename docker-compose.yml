@@ -1,0 +1,21 @@
+version: "3"
+services:
+  ical:
+    image: danilaisaichev/scheduler-ical
+    restart: always
+    environment:
+      - "BACKEND_URL=your_backend_url:your_backend_port"
+      - "HOURS=19"
+    volumes:
+      - ./cals:/projects/scheduler-ical/cals
+      - ./logs:/projects/scheduler-ical/logs
+
+  frontend:
+    container_name: scheduler-public
+    image: danilaisaichev/scheduler-public
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./cals:/projects/scheduler-public/cals
+      - ./logs:/projects/scheduler-public/logs
